@@ -1,7 +1,7 @@
-From 64bd53306e0301e707a52be9f4f7121c87cd6f7d Mon Sep 17 00:00:00 2001
+From ed7750865117a33eff3d4aa6f17e92a65aaf3a2c Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Sun, 28 Jul 2019 13:17:54 +0300
-Subject: [PATCH] plat/nxp: Add lx2160acex7 module support
+Subject: [PATCH 1/2] plat/nxp: Add lx2160acex7 module support
 
 Adds SolidRun's LX2160A based SoC COM express type 7 module support.
 The patch is based on LX2160ARDB board and modifies the support to two
@@ -21,7 +21,7 @@ Signed-off-by: Rabeeh Khoury <rabeeh@solid-run.com>
 
 diff --git a/plat/nxp/soc-lx2160/lx2160acex7/ddr_init.c b/plat/nxp/soc-lx2160/lx2160acex7/ddr_init.c
 new file mode 100644
-index 00000000..d0bcdf46
+index 000000000000..d0bcdf466002
 --- /dev/null
 +++ b/plat/nxp/soc-lx2160/lx2160acex7/ddr_init.c
 @@ -0,0 +1,77 @@
@@ -104,7 +104,7 @@ index 00000000..d0bcdf46
 +}
 diff --git a/plat/nxp/soc-lx2160/lx2160acex7/platform.mk b/plat/nxp/soc-lx2160/lx2160acex7/platform.mk
 new file mode 100644
-index 00000000..490f82f8
+index 000000000000..490f82f8da32
 --- /dev/null
 +++ b/plat/nxp/soc-lx2160/lx2160acex7/platform.mk
 @@ -0,0 +1,16 @@
@@ -126,7 +126,7 @@ index 00000000..490f82f8
 +
 diff --git a/plat/nxp/soc-lx2160/lx2160acex7/platform_def.h b/plat/nxp/soc-lx2160/lx2160acex7/platform_def.h
 new file mode 100644
-index 00000000..614f0342
+index 000000000000..614f03423b95
 --- /dev/null
 +++ b/plat/nxp/soc-lx2160/lx2160acex7/platform_def.h
 @@ -0,0 +1,187 @@
@@ -319,7 +319,7 @@ index 00000000..614f0342
 +#endif 
 diff --git a/plat/nxp/soc-lx2160/lx2160acex7/policy.h b/plat/nxp/soc-lx2160/lx2160acex7/policy.h
 new file mode 100644
-index 00000000..deae979c
+index 000000000000..deae979c43fe
 --- /dev/null
 +++ b/plat/nxp/soc-lx2160/lx2160acex7/policy.h
 @@ -0,0 +1,40 @@
@@ -364,5 +364,5 @@ index 00000000..deae979c
 +
 +#endif // _POLICY_H
 -- 
-2.17.1
+2.20.1
 

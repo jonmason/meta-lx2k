@@ -4,7 +4,7 @@ LICENSE = "Proprietary"
 inherit deploy
 
 SRC_URI = "git://github.com/NXP/ddr-phy-binary.git;protocol=https"
-SRCREV = "14d03e6e748ed5ebb9440f264bb374f1280b061c"
+SRCREV = "fbc036b88acb6c06ffed02c898cbae9856ec75ba"
 
 LIC_FILES_CHKSUM = "file://README;md5=2b2ebcf79004f09c37fc79affccc8bbe"
 

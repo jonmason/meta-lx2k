@@ -1,0 +1,11 @@
+part spl --source rawcopy --sourceparams="file=bl2_sd.pbl" --ondisk mmcblk0 --no-table --align 4 --size 1020k
+part spl --source rawcopy --sourceparams="file=fip.bin" --ondisk mmcblk0 --no-table --align 4 --size 7M
+part spl --source rawcopy --sourceparams="file=fip_ddr_all.bin" --ondisk mmcblk0 --no-table --size=4k --size 2M
+part spl --source rawcopy --sourceparams="file=mc_10.20.4_lx2160a.itb" --ondisk mmcblk0 --no-table --align 4 --size 3M
+part spl --source rawcopy --sourceparams="file=dpl-eth.8x10g.19.dtb" --ondisk mmcblk0 --no-table --align 4 --size 1M
+part spl --source rawcopy --sourceparams="file=dpc-8_x_usxgmii.dtb" --ondisk mmcblk0 --no-table --align 4 --size 2M
+part spl --source rawcopy --sourceparams="file=fitImage" --ondisk mmcblk0 --no-table --align 4
+
+part /boot --source bootimg-partition --ondisk mmcblk0 --fstype=vfat --label boot --active --align 4 --size 16 --sourceparams="loader=u-boot" --use-uuid
+part / --source rootfs --ondisk mmcblk0 --fstype=ext4 --label root --align 4 --use-uuid
+#bootloader --append="root=/dev/nvme0n1p1 console=ttyAMA0,115200 pci=pcie_bus_safe"

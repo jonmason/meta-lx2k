@@ -1,7 +1,7 @@
-From 3b0e8b6e242549c2ed992d7556d7966a77b6da86 Mon Sep 17 00:00:00 2001
+From 0faae2f1396496d2229cd81e284e2a7297d582f5 Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Tue, 5 Nov 2019 10:35:32 +0200
-Subject: [PATCH] S2 - enable gen3, xspi increase divisor to 28
+Subject: [PATCH 3/8] S2 - enable gen3, xspi increase divisor to 28
 
 Serdes group 2 enable PCIe gen 3
 XSPI increase divisor to 28 - this fixes UEFI SPI flash detection.
@@ -13,7 +13,7 @@ Signed-off-by: Rabeeh Khoury <rabeeh@solid-run.com>
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/lx2160acex7/configs/lx2160a_defaults.rcwi b/lx2160acex7/configs/lx2160a_defaults.rcwi
-index dbc843f..3ea7683 100644
+index dbc843fb566d..3ea7683fd668 100644
 --- a/lx2160acex7/configs/lx2160a_defaults.rcwi
 +++ b/lx2160acex7/configs/lx2160a_defaults.rcwi
 @@ -14,7 +14,7 @@ IIC3_PMUX=0
@@ -26,7 +26,7 @@ index dbc843f..3ea7683 100644
  SDHC1_DIR_PMUX=1
  IRQ03_00_PMUX=1
 diff --git a/lx2160acex7/configs/lx2160a_xspiboot.rcwi b/lx2160acex7/configs/lx2160a_xspiboot.rcwi
-index eecc314..28310c9 100644
+index eecc314edea9..28310c97577e 100644
 --- a/lx2160acex7/configs/lx2160a_xspiboot.rcwi
 +++ b/lx2160acex7/configs/lx2160a_xspiboot.rcwi
 @@ -14,4 +14,4 @@
@@ -36,5 +36,5 @@ index eecc314..28310c9 100644
 -#include <../lx2160asi/flexspi_divisor_24.rcw>
 +#include <../lx2160asi/flexspi_divisor_28.rcw>
 -- 
-2.17.1
+2.20.1
 

@@ -5,8 +5,9 @@ inherit deploy
 
 SRC_URI = "git://source.codeaurora.org/external/qoriq/qoriq-components/atf;protocol=https;nobranch=1 \
 	   file://0001-plat-nxp-Add-lx2160acex7-module-support.patch \
+           file://0002-plat-nxp-lx2160a-auto-boot.patch \
 	  "
-SRCREV = "7faac4fc1f375442ec19e468471d43684c9821ca"
+SRCREV = "4a82c939a0211196e2b80a495f966383803753bb"
 
 LIC_FILES_CHKSUM = "file://license.rst;md5=e927e02bca647e14efd87e9e914b2443"
 S = "${WORKDIR}/git"
@@ -18,8 +19,8 @@ AS[unexport] = "1"
 LD[unexport] = "1"
 
 #PROVIDES += "fiptool"
-DEPENDS += "u-boot-lx2k rcw"
-do_compile[depends] += "u-boot-lx2k:do_deploy"
+DEPENDS += "u-boot rcw"
+do_compile[depends] += "u-boot:do_deploy"
 do_compile[depends] += "rcw:do_deploy"
 
 do_clean() {

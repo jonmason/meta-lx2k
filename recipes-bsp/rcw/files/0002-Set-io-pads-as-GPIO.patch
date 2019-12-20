@@ -1,7 +1,7 @@
-From b184697cff85d8f98e765014309b97444ff1c5b7 Mon Sep 17 00:00:00 2001
+From 44a7f85670cf0086d0aacfdcfca19030330ac9b2 Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Wed, 30 Oct 2019 11:43:37 +0200
-Subject: [PATCH 2/2] Set io pads as GPIO
+Subject: [PATCH 2/8] Set io pads as GPIO
 
 Signed-off-by: Rabeeh Khoury <rabeeh@solid-run.com>
 ---
@@ -9,7 +9,7 @@ Signed-off-by: Rabeeh Khoury <rabeeh@solid-run.com>
  1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/lx2160acex7/configs/lx2160a_defaults.rcwi b/lx2160acex7/configs/lx2160a_defaults.rcwi
-index 6fd65ec..dbc843f 100644
+index 6fd65ec8c12e..dbc843fb566d 100644
 --- a/lx2160acex7/configs/lx2160a_defaults.rcwi
 +++ b/lx2160acex7/configs/lx2160a_defaults.rcwi
 @@ -9,11 +9,16 @@ HWA_CGA_M1_CLK_SEL=1
@@ -32,5 +32,5 @@ index 6fd65ec..dbc843f 100644
 +EVT20_PMUX=1
 +EVT43_PMUX=1
 -- 
-2.17.1
+2.20.1
 

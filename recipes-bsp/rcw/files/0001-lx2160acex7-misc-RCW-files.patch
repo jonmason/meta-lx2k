@@ -1,7 +1,7 @@
-From ef5ab1b5a7262a6ef9caf334b0c772b0ebf00fdf Mon Sep 17 00:00:00 2001
+From f6974deea60b4108cc107a553d94e565937601ba Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Sun, 28 Jul 2019 14:43:06 +0300
-Subject: [PATCH] lx2160acex7 misc RCW files
+Subject: [PATCH 1/8] lx2160acex7 misc RCW files
 
 This patch adds support for lx2160a rcw project.
 In general RCW has lots of redundent files and can be restructured
@@ -85,7 +85,7 @@ Signed-off-by: Rabeeh Khoury <rabeeh@solid-run.com>
 
 diff --git a/lx2160acex7/Makefile b/lx2160acex7/Makefile
 new file mode 100644
-index 0000000..d7e9447
+index 000000000000..d7e944705097
 --- /dev/null
 +++ b/lx2160acex7/Makefile
 @@ -0,0 +1,2 @@
@@ -93,7 +93,7 @@ index 0000000..d7e9447
 +
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw.orig b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw.orig
 new file mode 100644
-index 0000000..cdb6446
+index 000000000000..cdb6446fc251
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw.orig
 @@ -0,0 +1,61 @@
@@ -160,7 +160,7 @@ index 0000000..cdb6446
 +#include <../lx2160asi/common.rcw>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_1900_600_2600_17_4_2.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_1900_600_2600_17_4_2.rcw
 new file mode 100644
-index 0000000..13ab0b9
+index 000000000000..13ab0b9ed1d0
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_1900_600_2600_17_4_2.rcw
 @@ -0,0 +1,4 @@
@@ -170,7 +170,7 @@ index 0000000..13ab0b9
 +#include <configs/lx2160a_xspiboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_1900_600_2600_17_4_2_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_1900_600_2600_17_4_2_sd.rcw
 new file mode 100644
-index 0000000..14fae8c
+index 000000000000..14fae8cdc574
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_1900_600_2600_17_4_2_sd.rcw
 @@ -0,0 +1,4 @@
@@ -180,7 +180,7 @@ index 0000000..14fae8c
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2400_13_5_2_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2400_13_5_2_sd.rcw
 new file mode 100644
-index 0000000..2dae5a2
+index 000000000000..2dae5a20cdf7
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2400_13_5_2_sd.rcw
 @@ -0,0 +1,4 @@
@@ -190,7 +190,7 @@ index 0000000..2dae5a2
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2400_20_5_2_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2400_20_5_2_sd.rcw
 new file mode 100644
-index 0000000..5335072
+index 000000000000..533507237fb0
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2400_20_5_2_sd.rcw
 @@ -0,0 +1,4 @@
@@ -200,7 +200,7 @@ index 0000000..5335072
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2400_8_5_2_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2400_8_5_2_sd.rcw
 new file mode 100644
-index 0000000..e2a5bd3
+index 000000000000..e2a5bd391b4d
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2400_8_5_2_sd.rcw
 @@ -0,0 +1,4 @@
@@ -210,7 +210,7 @@ index 0000000..e2a5bd3
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2600_8_5_2_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2600_8_5_2_sd.rcw
 new file mode 100644
-index 0000000..a330bfe
+index 000000000000..a330bfe0e062
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2600_8_5_2_sd.rcw
 @@ -0,0 +1,4 @@
@@ -220,7 +220,7 @@ index 0000000..a330bfe
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2900_17_4_2_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2900_17_4_2_sd.rcw
 new file mode 100644
-index 0000000..8535dbd
+index 000000000000..8535dbdc3191
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2900_17_4_2_sd.rcw
 @@ -0,0 +1,4 @@
@@ -230,7 +230,7 @@ index 0000000..8535dbd
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2900_8_5_2_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2900_8_5_2_sd.rcw
 new file mode 100644
-index 0000000..698be01
+index 000000000000..698be0185eae
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_2900_8_5_2_sd.rcw
 @@ -0,0 +1,4 @@
@@ -240,7 +240,7 @@ index 0000000..698be01
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_17_4_2_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_17_4_2_sd.rcw
 new file mode 100644
-index 0000000..780d8c3
+index 000000000000..780d8c3ac1aa
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_17_4_2_sd.rcw
 @@ -0,0 +1,4 @@
@@ -250,7 +250,7 @@ index 0000000..780d8c3
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_20_5_2_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_20_5_2_sd.rcw
 new file mode 100644
-index 0000000..eb9d240
+index 000000000000..eb9d24059273
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_20_5_2_sd.rcw
 @@ -0,0 +1,4 @@
@@ -260,7 +260,7 @@ index 0000000..eb9d240
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_8_5_0_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_8_5_0_sd.rcw
 new file mode 100644
-index 0000000..ceb53a3
+index 000000000000..ceb53a37e6d4
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_8_5_0_sd.rcw
 @@ -0,0 +1,4 @@
@@ -270,7 +270,7 @@ index 0000000..ceb53a3
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_8_5_2_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_8_5_2_sd.rcw
 new file mode 100644
-index 0000000..a220e98
+index 000000000000..a220e9876693
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_8_5_2_sd.rcw
 @@ -0,0 +1,4 @@
@@ -280,7 +280,7 @@ index 0000000..a220e98
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_8_5_2_xspi.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_8_5_2_xspi.rcw
 new file mode 100644
-index 0000000..1eabd7d
+index 000000000000..1eabd7dbc9e3
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2000_700_3200_8_5_2_xspi.rcw
 @@ -0,0 +1,4 @@
@@ -290,7 +290,7 @@ index 0000000..1eabd7d
 +#include <configs/lx2160a_xspiboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2400_700_3200_8_5_2_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2400_700_3200_8_5_2_sd.rcw
 new file mode 100644
-index 0000000..2ac59b1
+index 000000000000..2ac59b107043
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2400_700_3200_8_5_2_sd.rcw
 @@ -0,0 +1,4 @@
@@ -300,7 +300,7 @@ index 0000000..2ac59b1
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2500_700_3200_8_5_2_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2500_700_3200_8_5_2_sd.rcw
 new file mode 100644
-index 0000000..e7c08df
+index 000000000000..e7c08dffe882
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2500_700_3200_8_5_2_sd.rcw
 @@ -0,0 +1,4 @@
@@ -310,7 +310,7 @@ index 0000000..e7c08df
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2600_700_3200_8_5_2_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2600_700_3200_8_5_2_sd.rcw
 new file mode 100644
-index 0000000..1e7a8f7
+index 000000000000..1e7a8f74b3eb
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_2600_700_3200_8_5_2_sd.rcw
 @@ -0,0 +1,4 @@
@@ -320,7 +320,7 @@ index 0000000..1e7a8f7
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_test_sd.rcw b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_test_sd.rcw
 new file mode 100644
-index 0000000..86f12f8
+index 000000000000..86f12f871364
 --- /dev/null
 +++ b/lx2160acex7/XGGFF_PP_HHHH_RR_19_5_2/rcw_test_sd.rcw
 @@ -0,0 +1,4 @@
@@ -330,7 +330,7 @@ index 0000000..86f12f8
 +#include <configs/lx2160a_sdboot.rcwi>
 diff --git a/lx2160acex7/configs/lx2160a_13_5_2.rcwi b/lx2160acex7/configs/lx2160a_13_5_2.rcwi
 new file mode 100644
-index 0000000..76f44bc
+index 000000000000..76f44bc3c64c
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_13_5_2.rcwi
 @@ -0,0 +1,3 @@
@@ -339,7 +339,7 @@ index 0000000..76f44bc
 +SRDS_PRTCL_S3=2
 diff --git a/lx2160acex7/configs/lx2160a_17_4_2.rcwi b/lx2160acex7/configs/lx2160a_17_4_2.rcwi
 new file mode 100644
-index 0000000..358972d
+index 000000000000..358972d000bb
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_17_4_2.rcwi
 @@ -0,0 +1,7 @@
@@ -352,7 +352,7 @@ index 0000000..358972d
 +
 diff --git a/lx2160acex7/configs/lx2160a_1900_600_2600.rcwi b/lx2160acex7/configs/lx2160a_1900_600_2600.rcwi
 new file mode 100644
-index 0000000..8b61021
+index 000000000000..8b6102106315
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_1900_600_2600.rcwi
 @@ -0,0 +1,12 @@
@@ -370,7 +370,7 @@ index 0000000..8b61021
 +/* #include <../lx2160asi/flexspi_divisor_24.rcw>*/
 diff --git a/lx2160acex7/configs/lx2160a_2000_700_2400.rcwi b/lx2160acex7/configs/lx2160a_2000_700_2400.rcwi
 new file mode 100644
-index 0000000..6b0b150
+index 000000000000..6b0b15077f4f
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_2000_700_2400.rcwi
 @@ -0,0 +1,12 @@
@@ -388,7 +388,7 @@ index 0000000..6b0b150
 +/* #include <../lx2160asi/flexspi_divisor_28.rcw>*/
 diff --git a/lx2160acex7/configs/lx2160a_2000_700_2600.rcwi b/lx2160acex7/configs/lx2160a_2000_700_2600.rcwi
 new file mode 100644
-index 0000000..21dce67
+index 000000000000..21dce67eee77
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_2000_700_2600.rcwi
 @@ -0,0 +1,12 @@
@@ -406,7 +406,7 @@ index 0000000..21dce67
 +/* #include <../lx2160asi/flexspi_divisor_28.rcw>*/
 diff --git a/lx2160acex7/configs/lx2160a_2000_700_2900.rcwi b/lx2160acex7/configs/lx2160a_2000_700_2900.rcwi
 new file mode 100644
-index 0000000..e6a8e30
+index 000000000000..e6a8e304916b
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_2000_700_2900.rcwi
 @@ -0,0 +1,12 @@
@@ -424,7 +424,7 @@ index 0000000..e6a8e30
 +/* #include <../lx2160asi/flexspi_divisor_28.rcw>*/
 diff --git a/lx2160acex7/configs/lx2160a_2000_700_3200.rcwi b/lx2160acex7/configs/lx2160a_2000_700_3200.rcwi
 new file mode 100644
-index 0000000..27ee377
+index 000000000000..27ee37756191
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_2000_700_3200.rcwi
 @@ -0,0 +1,12 @@
@@ -442,7 +442,7 @@ index 0000000..27ee377
 +#include <../lx2160asi/flexspi_divisor_28.rcw>
 diff --git a/lx2160acex7/configs/lx2160a_20_5_2.rcwi b/lx2160acex7/configs/lx2160a_20_5_2.rcwi
 new file mode 100644
-index 0000000..c2c7bea
+index 000000000000..c2c7beafa76d
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_20_5_2.rcwi
 @@ -0,0 +1,7 @@
@@ -455,7 +455,7 @@ index 0000000..c2c7bea
 +SRDS_PLL_PD_PLL1=1
 diff --git a/lx2160acex7/configs/lx2160a_2400_700_3200.rcwi b/lx2160acex7/configs/lx2160a_2400_700_3200.rcwi
 new file mode 100644
-index 0000000..fc0fd6c
+index 000000000000..fc0fd6c3a667
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_2400_700_3200.rcwi
 @@ -0,0 +1,12 @@
@@ -473,7 +473,7 @@ index 0000000..fc0fd6c
 +#include <../lx2160asi/flexspi_divisor_28.rcw>
 diff --git a/lx2160acex7/configs/lx2160a_2500_700_3200.rcwi b/lx2160acex7/configs/lx2160a_2500_700_3200.rcwi
 new file mode 100644
-index 0000000..62d9069
+index 000000000000..62d9069b394c
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_2500_700_3200.rcwi
 @@ -0,0 +1,12 @@
@@ -491,7 +491,7 @@ index 0000000..62d9069
 +#include <../lx2160asi/flexspi_divisor_28.rcw>
 diff --git a/lx2160acex7/configs/lx2160a_2600_700_3200.rcwi b/lx2160acex7/configs/lx2160a_2600_700_3200.rcwi
 new file mode 100644
-index 0000000..e244917
+index 000000000000..e244917b7e2c
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_2600_700_3200.rcwi
 @@ -0,0 +1,12 @@
@@ -509,7 +509,7 @@ index 0000000..e244917
 +#include <../lx2160asi/flexspi_divisor_28.rcw>
 diff --git a/lx2160acex7/configs/lx2160a_8_5_0.rcwi b/lx2160acex7/configs/lx2160a_8_5_0.rcwi
 new file mode 100644
-index 0000000..62ff153
+index 000000000000..62ff15316055
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_8_5_0.rcwi
 @@ -0,0 +1,7 @@
@@ -522,7 +522,7 @@ index 0000000..62ff153
 +SRDS_PLL_PD_PLL1=1
 diff --git a/lx2160acex7/configs/lx2160a_8_5_2.rcwi b/lx2160acex7/configs/lx2160a_8_5_2.rcwi
 new file mode 100644
-index 0000000..d7d707a
+index 000000000000..d7d707a3d4c0
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_8_5_2.rcwi
 @@ -0,0 +1,7 @@
@@ -535,7 +535,7 @@ index 0000000..d7d707a
 +SRDS_PLL_PD_PLL1=1
 diff --git a/lx2160acex7/configs/lx2160a_defaults.rcwi b/lx2160acex7/configs/lx2160a_defaults.rcwi
 new file mode 100644
-index 0000000..6fd65ec
+index 000000000000..6fd65ec8c12e
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_defaults.rcwi
 @@ -0,0 +1,19 @@
@@ -560,7 +560,7 @@ index 0000000..6fd65ec
 +
 diff --git a/lx2160acex7/configs/lx2160a_sdboot.rcwi b/lx2160acex7/configs/lx2160a_sdboot.rcwi
 new file mode 100644
-index 0000000..d537ea5
+index 000000000000..d537ea5d1cde
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_sdboot.rcwi
 @@ -0,0 +1,20 @@
@@ -586,7 +586,7 @@ index 0000000..d537ea5
 +
 diff --git a/lx2160acex7/configs/lx2160a_test.rcwi b/lx2160acex7/configs/lx2160a_test.rcwi
 new file mode 100644
-index 0000000..a223be1
+index 000000000000..a223be139639
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_test.rcwi
 @@ -0,0 +1,20 @@
@@ -612,7 +612,7 @@ index 0000000..a223be1
 +
 diff --git a/lx2160acex7/configs/lx2160a_xspiboot.rcwi b/lx2160acex7/configs/lx2160a_xspiboot.rcwi
 new file mode 100644
-index 0000000..eecc314
+index 000000000000..eecc314edea9
 --- /dev/null
 +++ b/lx2160acex7/configs/lx2160a_xspiboot.rcwi
 @@ -0,0 +1,17 @@
@@ -634,5 +634,5 @@ index 0000000..eecc314
 +/* Modify FlexSPI Clock Divisor value */
 +#include <../lx2160asi/flexspi_divisor_24.rcw>
 -- 
-2.17.1
+2.20.1
 

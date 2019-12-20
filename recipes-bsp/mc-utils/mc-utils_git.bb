@@ -6,7 +6,7 @@ inherit deploy
 SRC_URI = "git://source.codeaurora.org/external/qoriq/qoriq-components/mc-utils;protocol=https;nobranch=1 \
 	   file://0001-lx2160acex7-add-8x10G-dual-40G-and-dual-100G-DPL-DPC.patch \
 	  "
-SRCREV = "18c77603733b3fcd0b716bf9800e052330941f4e"
+SRCREV = "8672a5f5abcd3a354dcab07e03f2a8a69b2e962d"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=386a6287daa6504b7e7e5014ddfb3987"
 S = "${WORKDIR}/git"

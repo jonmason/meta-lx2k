@@ -1,0 +1,39 @@
+From 591caf42f5fe84e08624df4090133b3a9e1c2429 Mon Sep 17 00:00:00 2001
+From: Rabeeh Khoury <rabeeh@solid-run.com>
+Date: Wed, 26 Feb 2020 17:57:54 +0200
+Subject: [PATCH 6/6] pci: spr2803: quirk to fix class ID
+
+spr2803 class is 0x0, this quirk modifies that to multimedia class in
+order to allocate memory to it's bars.
+
+Signed-off-by: Rabeeh Khoury <rabeeh@solid-run.com>
+---
+ drivers/pci/quirks.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/drivers/pci/quirks.c b/drivers/pci/quirks.c
+index fb7031e4b873..e8c89b3505a7 100644
+--- a/drivers/pci/quirks.c
++++ b/drivers/pci/quirks.c
+@@ -3172,6 +3172,18 @@ static void fixup_ti816x_class(struct pci_dev *dev)
+ DECLARE_PCI_FIXUP_CLASS_EARLY(PCI_VENDOR_ID_TI, 0xb800,
+ 			      PCI_CLASS_NOT_DEFINED, 8, fixup_ti816x_class);
+ 
++static void fixup_spr2803_class(struct pci_dev *dev)
++{
++	u32 class = dev->class;
++
++	/* spr2803 does not have class code */
++	dev->class = PCI_CLASS_MULTIMEDIA_VIDEO << 8;
++	pci_info(dev, "PCI class overridden (%#08x -> %#08x)\n",
++		 class, dev->class);
++}
++DECLARE_PCI_FIXUP_CLASS_EARLY(0x1e00, 0x2803,
++			      PCI_CLASS_NOT_DEFINED, 8, fixup_spr2803_class);
++
+ /*
+  * Some PCIe devices do not work reliably with the claimed maximum
+  * payload size supported.
+-- 
+2.20.1
+

@@ -1,4 +1,4 @@
-From 1b1279d4ce8eb28a3c4f1e98bcd62f16173d8285 Mon Sep 17 00:00:00 2001
+From cb5286b997c06b9820ce2484961545d7024e6c1b Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Sun, 28 Jul 2019 14:40:28 +0300
 Subject: [PATCH] lx2160acex7: add 8x10G, dual 40G and dual 100G DPL/DPC files
@@ -21,7 +21,7 @@ Signed-off-by: Rabeeh Khoury <rabeeh@solid-run.com>
 
 diff --git a/config/lx2160a/CEX7/dpc-8_x_usxgmii.dts b/config/lx2160a/CEX7/dpc-8_x_usxgmii.dts
 new file mode 100644
-index 0000000..44e22bb
+index 000000000000..44e22bb84b0b
 --- /dev/null
 +++ b/config/lx2160a/CEX7/dpc-8_x_usxgmii.dts
 @@ -0,0 +1,103 @@
@@ -130,7 +130,7 @@ index 0000000..44e22bb
 +};
 diff --git a/config/lx2160a/CEX7/dpc-dual-100g.dts b/config/lx2160a/CEX7/dpc-dual-100g.dts
 new file mode 100644
-index 0000000..0601a07
+index 000000000000..0601a07dbe6e
 --- /dev/null
 +++ b/config/lx2160a/CEX7/dpc-dual-100g.dts
 @@ -0,0 +1,85 @@
@@ -221,7 +221,7 @@ index 0000000..0601a07
 +};
 diff --git a/config/lx2160a/CEX7/dpc-dual-40g.dts b/config/lx2160a/CEX7/dpc-dual-40g.dts
 new file mode 100644
-index 0000000..0601a07
+index 000000000000..0601a07dbe6e
 --- /dev/null
 +++ b/config/lx2160a/CEX7/dpc-dual-40g.dts
 @@ -0,0 +1,85 @@
@@ -312,7 +312,7 @@ index 0000000..0601a07
 +};
 diff --git a/config/lx2160a/CEX7/dpl-eth.8x10g.19.dts b/config/lx2160a/CEX7/dpl-eth.8x10g.19.dts
 new file mode 100644
-index 0000000..b72af03
+index 000000000000..b72af031cd92
 --- /dev/null
 +++ b/config/lx2160a/CEX7/dpl-eth.8x10g.19.dts
 @@ -0,0 +1,532 @@
@@ -850,7 +850,7 @@ index 0000000..b72af03
 +
 diff --git a/config/lx2160a/CEX7/dpl-eth.dual-100g.19.dts b/config/lx2160a/CEX7/dpl-eth.dual-100g.19.dts
 new file mode 100644
-index 0000000..bb1b54f
+index 000000000000..bb1b54fee3fc
 --- /dev/null
 +++ b/config/lx2160a/CEX7/dpl-eth.dual-100g.19.dts
 @@ -0,0 +1,511 @@
@@ -1367,7 +1367,7 @@ index 0000000..bb1b54f
 +
 diff --git a/config/lx2160a/CEX7/dpl-eth.dual-40g.19.dts b/config/lx2160a/CEX7/dpl-eth.dual-40g.19.dts
 new file mode 100644
-index 0000000..5619fd2
+index 000000000000..5619fd2a4c0f
 --- /dev/null
 +++ b/config/lx2160a/CEX7/dpl-eth.dual-40g.19.dts
 @@ -0,0 +1,534 @@
@@ -1906,5 +1906,5 @@ index 0000000..5619fd2
 +};
 +
 -- 
-2.17.1
+2.20.1
 
