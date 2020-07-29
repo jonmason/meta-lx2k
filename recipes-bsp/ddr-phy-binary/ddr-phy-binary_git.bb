@@ -10,12 +10,10 @@ LIC_FILES_CHKSUM = "file://README;md5=2b2ebcf79004f09c37fc79affccc8bbe"
 
 S = "${WORKDIR}/git"
 
-DEPENDS += "atf"
-do_compile[depends] += "atf:do_deploy"
+DEPENDS += "fiptool-native"
 
 do_compile() {
-	#oe_runmake
-	${DEPLOY_DIR_IMAGE}/fiptool create --ddr-immem-udimm-1d lx2160a/ddr4_pmu_train_imem.bin --ddr-immem-udimm-2d lx2160a/ddr4_2d_pmu_train_imem.bin --ddr-dmmem-udimm-1d lx2160a/ddr4_pmu_train_dmem.bin --ddr-dmmem-udimm-2d lx2160a/ddr4_2d_pmu_train_dmem.bin --ddr-immem-rdimm-1d lx2160a/ddr4_rdimm_pmu_train_imem.bin --ddr-immem-rdimm-2d lx2160a/ddr4_rdimm2d_pmu_train_imem.bin --ddr-dmmem-rdimm-1d lx2160a/ddr4_rdimm_pmu_train_dmem.bin --ddr-dmmem-rdimm-2d lx2160a/ddr4_rdimm2d_pmu_train_dmem.bin fip_ddr_all.bin
+	fiptool create --ddr-immem-udimm-1d lx2160a/ddr4_pmu_train_imem.bin --ddr-immem-udimm-2d lx2160a/ddr4_2d_pmu_train_imem.bin --ddr-dmmem-udimm-1d lx2160a/ddr4_pmu_train_dmem.bin --ddr-dmmem-udimm-2d lx2160a/ddr4_2d_pmu_train_dmem.bin --ddr-immem-rdimm-1d lx2160a/ddr4_rdimm_pmu_train_imem.bin --ddr-immem-rdimm-2d lx2160a/ddr4_rdimm2d_pmu_train_imem.bin --ddr-dmmem-rdimm-1d lx2160a/ddr4_rdimm_pmu_train_dmem.bin --ddr-dmmem-rdimm-2d lx2160a/ddr4_rdimm2d_pmu_train_dmem.bin fip_ddr_all.bin
 }
 
 do_deploy() {
