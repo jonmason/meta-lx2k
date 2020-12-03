@@ -1,0 +1,14 @@
+diff --git a/Silicon/NXP/Library/Dpaa2McInterfaceLib/dpni.c b/Silicon/NXP/Library/Dpaa2McInterfaceLib/dpni.c
+index 39994bd7955b..4c5a2a6533e7 100644
+--- a/edk2-platforms/Silicon/NXP/Library/Dpaa2McInterfaceLib/dpni.c
++++ b/edk2-platforms/Silicon/NXP/Library/Dpaa2McInterfaceLib/dpni.c
+@@ -32,7 +32,8 @@
+ #include <Library/Dpaa2McIo.h>
+ #include <Library/Dpaa2McInterfaceLib/fsl_dpni.h>
+ #include <Library/Dpaa2McInterfaceLib/fsl_dpni_cmd.h>
+-#include <errno.h>
++
++#define EINVAL	22
+ 
+ int dpni_prepare_key_cfg(const struct dpkg_profile_cfg *cfg,
+                          uint8_t *key_cfg_buf)

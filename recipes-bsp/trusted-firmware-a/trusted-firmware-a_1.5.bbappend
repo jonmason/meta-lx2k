@@ -9,11 +9,12 @@ SRCREV = "4a82c939a0211196e2b80a495f966383803753bb"
 
 COMPATIBLE_MACHINE = "honeycomb_lx2k"
 TFA_PLATFORM = "lx2160acex7"
-TFA_UBOOT = "1"
 TFA_BUILD_TARGET = "fip pbl"
 TFA_INSTALL_TARGET = "fip"
 
 EXTRA_OEMAKE += "RCW=${DEPLOY_DIR_IMAGE}/rcw_*_${DDR_SPEED}_${SERDES}_${BOOT}.bin BOOT_MODE=${BOOT}"
+EXTRA_OEMAKE += "${@bb.utils.contains('TFA_UBOOT', '1', 'BL33=${DEPLOY_DIR_IMAGE}/u-boot.bin', '',d)}"
+EXTRA_OEMAKE += "${@bb.utils.contains('TFA_UBOOT', '0', 'BL33=${DEPLOY_DIR_IMAGE}/uefi.bin', '',d)}"
 
 do_compile[depends] += "rcw:do_deploy"
 
