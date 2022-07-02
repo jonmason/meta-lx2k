@@ -32,4 +32,5 @@ SRC_URI = "git://source.codeaurora.org/external/qoriq/qoriq-components/u-boot;pr
 	   file://0013-nvme-flush-dcache-on-both-r-w-and-the-prp-list.patch \
 	   file://0014-nvme-use-page-aligned-buffer-for-identify-command.patch \
 	   file://0007-yocto.patch \
+	   file://yylloc.patch \
 	  "
