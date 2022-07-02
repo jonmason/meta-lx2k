@@ -1,4 +1,3 @@
-inherit kernel
 require recipes-kernel/linux/linux-yocto.inc
 
 SRC_URI = "git://source.codeaurora.org/external/qoriq/qoriq-components/linux;protocol=https;nobranch=1 \
@@ -9,12 +8,12 @@ SRC_URI = "git://source.codeaurora.org/external/qoriq/qoriq-components/linux;pro
            file://0004-arm64-dts-lx2160a-cex7-add-on-module-eeproms.patch \
            file://0005-pci-hotplug-declare-IDT-bridge-as-hotpluggabl-bridge.patch \
            file://0006-pci-spr2803-quirk-to-fix-class-ID.patch \
+           file://scripts-dtc-remove-redundant-YYLOC.patch \
 	  "
 SRCREV = "f8118585ee3c7025265b28985fdfe0af96a84466"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
-KERNEL_VERSION_SANITY_SKIP = "1"
+LINUX_VERSION = "5.4.3"
+KMETA = "kernel-meta"
 
-LICENSE = "GPLv2 & LGPLv2"
-
-S = "${WORKDIR}/git"
+PV = "${LINUX_VERSION}+git${SRCPV}"

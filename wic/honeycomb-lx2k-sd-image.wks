@@ -2,4 +2,4 @@ part /boot --source bootimg-partition --ondisk mmcblk0 --fstype=vfat --label boo
 
 part / --source rootfs --ondisk mmcblk0 --fstype=ext4 --label root --align 4 --use-uuid
 
-bootloader --append="root=/dev/nvme0n1p1 console=ttyAMA0,115200 pci=pcie_bus_safe"
+bootloader --append="root=/dev/mmcblk0p2 console=ttyAMA0,115200 pci=pcie_bus_safe"
