@@ -1,7 +1,7 @@
-From f6974deea60b4108cc107a553d94e565937601ba Mon Sep 17 00:00:00 2001
+From e2740b00554e60c62955560d8a1ef4e708b012a4 Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Sun, 28 Jul 2019 14:43:06 +0300
-Subject: [PATCH 1/8] lx2160acex7 misc RCW files
+Subject: [PATCH 01/15] lx2160acex7 misc RCW files
 
 This patch adds support for lx2160a rcw project.
 In general RCW has lots of redundent files and can be restructured
@@ -634,5 +634,5 @@ index 000000000000..eecc314edea9
 +/* Modify FlexSPI Clock Divisor value */
 +#include <../lx2160asi/flexspi_divisor_24.rcw>
 -- 
-2.20.1
+2.30.2
 

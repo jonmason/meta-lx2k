@@ -1,7 +1,7 @@
-From 44a7f85670cf0086d0aacfdcfca19030330ac9b2 Mon Sep 17 00:00:00 2001
+From 19e659fe280226c7d52b52d602d24585c301a754 Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Wed, 30 Oct 2019 11:43:37 +0200
-Subject: [PATCH 2/8] Set io pads as GPIO
+Subject: [PATCH 02/15] Set io pads as GPIO
 
 Signed-off-by: Rabeeh Khoury <rabeeh@solid-run.com>
 ---
@@ -32,5 +32,5 @@ index 6fd65ec8c12e..dbc843fb566d 100644
 +EVT20_PMUX=1
 +EVT43_PMUX=1
 -- 
-2.20.1
+2.30.2
 

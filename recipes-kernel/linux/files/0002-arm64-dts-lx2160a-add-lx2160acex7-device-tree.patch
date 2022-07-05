@@ -1,7 +1,7 @@
-From f24d8bf9da4b695bda138858e42609d7d4f2e8ea Mon Sep 17 00:00:00 2001
+From e1c4eb8471c7609760b2472fbe28c02b7c36dbf3 Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Sun, 28 Jul 2019 14:21:06 +0300
-Subject: [PATCH 2/6] arm64: dts: lx2160a: add lx2160acex7 device tree
+Subject: [PATCH 2/7] arm64: dts: lx2160a: add lx2160acex7 device tree
 
 The device tree enables the following features -
 1. dpmac17 RGMII MAC connected to Atheros AR8035 phy
@@ -219,5 +219,5 @@ index 000000000000..872fcf9e724d
 +	status = "okay";
 +};
 -- 
-2.20.1
+2.30.2
 

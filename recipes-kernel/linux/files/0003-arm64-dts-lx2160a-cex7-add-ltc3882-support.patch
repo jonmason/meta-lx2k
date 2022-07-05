@@ -1,7 +1,7 @@
-From 356b2905d845bc3268b3b3071b83f78bcbafd991 Mon Sep 17 00:00:00 2001
+From a1436fa2a2b8de3bafafe80fb2e0c11f3b9ba51d Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Sun, 12 Jan 2020 14:24:47 +0200
-Subject: [PATCH 3/6] arm64: dts: lx2160a-cex7: add ltc3882 support
+Subject: [PATCH 3/7] arm64: dts: lx2160a-cex7: add ltc3882 support
 
 ltc3882 is lx2 cortex-a72 core voltage.
 this patch adds it to the device tree support; the driver is in
@@ -33,5 +33,5 @@ index 872fcf9e724d..1c1a0d47897d 100644
  			#address-cells = <1>;
  			#size-cells = <0>;
 -- 
-2.20.1
+2.30.2
 

@@ -1,7 +1,7 @@
-From 40d095a326cadf1102607a22cb0e203dd7746b74 Mon Sep 17 00:00:00 2001
+From 35cde88cdfa94c65f4679020811d5f8285de264b Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Mon, 23 Mar 2020 12:36:20 +0200
-Subject: [PATCH 6/8] lx2160acex7 - pcie workarounds and fan full speed
+Subject: [PATCH 06/15] lx2160acex7 - pcie workarounds and fan full speed
 
 1. Moves calling the workarounds to the _defaults.rcwi
 2. Toggle fan-full-speed GPIO. The fan controller starts throttling when
@@ -89,5 +89,5 @@ index 28310c97577e..fa092c93977e 100644
  #include <../lx2160asi/common.rcw>
  
 -- 
-2.20.1
+2.30.2
 

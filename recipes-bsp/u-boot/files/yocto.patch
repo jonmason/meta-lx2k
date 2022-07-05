@@ -1,0 +1,42 @@
+diff --git a/configs/lx2160acex7_tfa_defconfig b/configs/lx2160acex7_tfa_defconfig
+index 8c2a6b338b..2fd65de64d 100644
+--- a/configs/lx2160acex7_tfa_defconfig
++++ b/configs/lx2160acex7_tfa_defconfig
+@@ -16,7 +16,7 @@ CONFIG_OF_BOARD_SETUP=y
+ CONFIG_OF_STDOUT_VIA_ALIAS=y
+ CONFIG_BOOTDELAY=10
+ CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyAMA0,115200 earlycon=pl011,mmio32,0x21c0000 default_hugepagesz=1024m hugepagesz=1024m hugepages=2 pci=pcie_bus_perf"
++CONFIG_BOOTARGS="console=ttyAMA0,115200 earlycon=pl011,mmio32,0x21c0000 default rootwait root=/dev/mmcblk0p2 pci=pcie_bus_safe"
+ # CONFIG_USE_BOOTCOMMAND is not set
+ CONFIG_MISC_INIT_R=y
+ CONFIG_CMD_GREPENV=y
+diff --git a/include/configs/lx2160acex7.h b/include/configs/lx2160acex7.h
+index d2ef78a243..b46ccd83c7 100644
+--- a/include/configs/lx2160acex7.h
++++ b/include/configs/lx2160acex7.h
+@@ -60,21 +60,21 @@
+ 		"$kernel_start $kernel_size ; env exists secureboot &&"	\
+ 		"sf read $kernelheader_addr_r $kernelheader_start "	\
+ 		"$kernelheader_size && esbc_validate ${kernelheader_addr_r}; "\
+-		" bootm $load_addr#$BOARD\0"			\
++		" bootm $load_addr\0"			\
+ 	"sd_bootcmd=echo Trying load from sd card..;"		\
+ 		"mmcinfo; mmc read $load_addr "			\
+ 		"$kernel_addr_sd $kernel_size_sd ;"		\
+ 		"env exists secureboot && mmc read $kernelheader_addr_r "\
+ 		"$kernelhdr_addr_sd $kernelhdr_size_sd "	\
+ 		" && esbc_validate ${kernelheader_addr_r};"	\
+-		"bootm $load_addr#$BOARD\0"			\
++		"bootm $load_addr\0"			\
+ 	"emmc_bootcmd=echo Trying load from emmc card..;"	\
+ 		"mmc dev 1; mmcinfo; mmc read $load_addr "	\
+ 		"$kernel_addr_sd $kernel_size_sd ;"		\
+ 		"env exists secureboot && mmc read $kernelheader_addr_r "\
+ 		"$kernelhdr_addr_sd $kernelhdr_size_sd "	\
+ 		" && esbc_validate ${kernelheader_addr_r};"	\
+-		"bootm $load_addr#$BOARD\0"
++		"bootm $load_addr\0"
+ 
+ #include <asm/fsl_secure_boot.h>
+ #define CONFIG_SYS_MEMTEST_START		0x2080000000

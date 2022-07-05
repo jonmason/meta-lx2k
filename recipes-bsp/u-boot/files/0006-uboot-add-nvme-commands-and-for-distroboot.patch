@@ -1,0 +1,39 @@
+From 60d866f4ce95555288cf5d29857468c773f01953 Mon Sep 17 00:00:00 2001
+From: Rabeeh Khoury <rabeeh@solid-run.com>
+Date: Mon, 11 Nov 2019 23:45:31 +0200
+Subject: [PATCH 06/26] uboot - add nvme commands and for distroboot
+
+Signed-off-by: Rabeeh Khoury <rabeeh@solid-run.com>
+---
+ configs/lx2160acex7_tfa_defconfig | 2 ++
+ include/configs/lx2160a_common.h  | 1 +
+ 2 files changed, 3 insertions(+)
+
+diff --git a/configs/lx2160acex7_tfa_defconfig b/configs/lx2160acex7_tfa_defconfig
+index d59de7d054f7..3891d2a7c4c7 100644
+--- a/configs/lx2160acex7_tfa_defconfig
++++ b/configs/lx2160acex7_tfa_defconfig
+@@ -25,6 +25,8 @@ CONFIG_CMD_PCI=y
+ CONFIG_CMD_SF=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_CACHE=y
++CONFIG_CMD_NVME=y
++CONFIG_NVME=y
+ CONFIG_MP=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_DEFAULT_DEVICE_TREE="fsl-lx2160a-cex7"
+diff --git a/include/configs/lx2160a_common.h b/include/configs/lx2160a_common.h
+index 822f71d82309..eec2d9308666 100644
+--- a/include/configs/lx2160a_common.h
++++ b/include/configs/lx2160a_common.h
+@@ -323,6 +323,7 @@ int select_i2c_ch_pca9547_sec(unsigned char ch);
+ 	func(MMC, mmc, 0) \
+ 	func(MMC, mmc, 1) \
+ 	func(SCSI, scsi, 0) \
++	func(NVME, nvme, 0) \
+ 	func(DHCP, dhcp, na)
+ #include <config_distro_bootcmd.h>
+ 
+-- 
+2.30.2
+

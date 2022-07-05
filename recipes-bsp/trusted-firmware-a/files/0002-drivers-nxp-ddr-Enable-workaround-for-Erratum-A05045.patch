@@ -1,0 +1,59 @@
+From 27bb34591ad1ce7cbf9ee4a9c62e39889a369dc4 Mon Sep 17 00:00:00 2001
+From: Priyanka Singh <priyanka.singh@nxp.com>
+Date: Wed, 27 May 2020 14:16:27 +0530
+Subject: [PATCH 02/15] drivers/nxp/ddr: Enable workaround for Erratum A050450
+
+When using 1T timing mode (DDR_SDRAM_CFG[2T_EN] == 0) with a tFAW value
+that is an even number, program the value in {TIMNIG_CFG_3[EXT_FOUR_ACT],
+TIMING_CFG_2[FOUR_ACT]} to a value of 1 MCK cycle higher than the tFAW
+requirement. This patch enables this workaround.
+
+Signed-off-by: Priyanka Singh <priyanka.singh@nxp.com>
+---
+ plat/nxp/drivers/ddr/nxp-ddr/regs.c | 10 +++++++++-
+ plat/nxp/soc-lx2160/soc.def         |  1 +
+ 2 files changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/plat/nxp/drivers/ddr/nxp-ddr/regs.c b/plat/nxp/drivers/ddr/nxp-ddr/regs.c
+index 94a71b78ac3d..e99a34b4e9a2 100644
+--- a/plat/nxp/drivers/ddr/nxp-ddr/regs.c
++++ b/plat/nxp/drivers/ddr/nxp-ddr/regs.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright 2018-2019 NXP
++ * Copyright 2018-2020 NXP
+  *
+  * SPDX-License-Identifier: BSD-3-Clause
+  *
+@@ -137,8 +137,16 @@ static void cal_timing_cfg(const unsigned long clk,
+ 	int rd_to_pre = picos_to_mclk(clk, 7500);
+ 	const int wr_data_delay = popts->wr_data_delay;
+ 	const int cke_pls = max(3U, picos_to_mclk(clk, 5000));
++
++#ifdef ERRATA_DDR_A050450
++	const unsigned short four_act = (!popts->twot_en && !popts->threet_en
++				&& (popts->tfaw_ps % 2 == 0)) ?
++				(picos_to_mclk(clk, popts->tfaw_ps) + 1) :
++				picos_to_mclk(clk, popts->tfaw_ps);
++#else
+ 	const unsigned short four_act = picos_to_mclk(clk,
+ 					 popts->tfaw_ps);
++#endif
+ 	const unsigned int cntl_adj = 0;
+ 	const unsigned int ext_pretoact = picos_to_mclk(clk,
+ 							pdimm->trp_ps) >> 4;
+diff --git a/plat/nxp/soc-lx2160/soc.def b/plat/nxp/soc-lx2160/soc.def
+index 3f8bb8936f5b..c097b679f837 100644
+--- a/plat/nxp/soc-lx2160/soc.def
++++ b/plat/nxp/soc-lx2160/soc.def
+@@ -33,6 +33,7 @@ CONSOLE=PL011
+  # Platform ERRATAS to be enabled
+ ERRATA_A72_859971 := 1
+ ERRATA_PLAT_A050426 := 1
++ERRATA_DDR_A050450 := 1
+ 
+  # Select the DDR PHY generation to be used
+ PLAT_DDR_PHY=phy-gen2
+-- 
+2.30.2
+

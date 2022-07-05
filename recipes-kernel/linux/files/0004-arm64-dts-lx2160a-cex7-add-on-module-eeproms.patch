@@ -1,7 +1,7 @@
-From 278396e6e82d618c1cbc4405371f6e76ff011160 Mon Sep 17 00:00:00 2001
+From 968e7f1ad481ed5953b1f67a14036d2313103cd1 Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Sun, 26 Jan 2020 15:36:07 +0200
-Subject: [PATCH 4/6] arm64: dts: lx2160a-cex7: add on-module eeproms
+Subject: [PATCH 4/7] arm64: dts: lx2160a-cex7: add on-module eeproms
 
 This patch adds 4 eeprom support on i2c mux channel #0 -
 1. Bootable 512Kbit eeprom at address 0x50.
@@ -48,5 +48,5 @@ index 1c1a0d47897d..2b8f1118b37a 100644
  			#address-cells = <1>;
  			#size-cells = <0>;
 -- 
-2.20.1
+2.30.2
 

@@ -1,0 +1,52 @@
+From ac2cd43e6131b37a20859e6997d7c38231c2052b Mon Sep 17 00:00:00 2001
+From: Ran Wang <ran.wang_1@nxp.com>
+Date: Tue, 3 Nov 2020 10:48:05 +0800
+Subject: [PATCH 06/15] plat: nxp: ls1048a: fix swlpm20 hang
+
+Step of 'Poll PCPW20SR for all secondary cores to be placed in PW20'
+doesn't cover case of LS1048A which has 4 cores only, causing the dead
+loop during (SW)LPM20 entry, correct it.
+
+Signed-off-by: Ran Wang <ran.wang_1@nxp.com>
+---
+ plat/nxp/soc-ls1088/aarch64/ls1088.S | 7 ++++++-
+ plat/nxp/soc-ls1088/include/soc.h    | 1 -
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/plat/nxp/soc-ls1088/aarch64/ls1088.S b/plat/nxp/soc-ls1088/aarch64/ls1088.S
+index f3f27211f47d..13b294fe0873 100644
+--- a/plat/nxp/soc-ls1088/aarch64/ls1088.S
++++ b/plat/nxp/soc-ls1088/aarch64/ls1088.S
+@@ -1030,11 +1030,16 @@ _soc_sys_prep_pwrdn:
+   */
+ _soc_sys_pwrdn_wfi:
+     mov  x8, x30
++
+      /* Poll PCPW20SR for all secondary cores to be placed in PW20 */
++    bl get_tot_num_cores
++    mov  x3, #0x1
++    lsl  x3, x3, x0
++    sub  x3, x3, #2
+ 1:
+     mov  x0, #NXP_PMU_ADDR
+     ldr  w1, [x0, #PMU_PCPW20SR_OFFSET]
+-    cmp  w1, #PMU_PCPW20SR_VAL
++    cmp  w1, w3
+     b.ne 1b
+ 
+      /* backup EPU registers to stack */
+diff --git a/plat/nxp/soc-ls1088/include/soc.h b/plat/nxp/soc-ls1088/include/soc.h
+index 5ba97f11d871..a245f2cd4c1e 100644
+--- a/plat/nxp/soc-ls1088/include/soc.h
++++ b/plat/nxp/soc-ls1088/include/soc.h
+@@ -98,7 +98,6 @@
+ 
+  /* pmu register offsets and values */
+ #define PMU_PCPW20SR_OFFSET           0x830
+-#define PMU_PCPW20SR_VAL              0xFE
+ #define PMU_CLAINACTSETR_OFFSET       0x1100
+ #define PMU_CLAINACTCLRR_OFFSET       0x1104
+ #define PMU_CLSINACTSETR_OFFSET       0x1108
+-- 
+2.30.2
+

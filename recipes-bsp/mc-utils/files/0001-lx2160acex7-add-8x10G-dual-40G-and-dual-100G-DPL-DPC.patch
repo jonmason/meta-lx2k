@@ -1,7 +1,8 @@
-From cb5286b997c06b9820ce2484961545d7024e6c1b Mon Sep 17 00:00:00 2001
+From 04ff76850821c03d759a36e493531fa1f99b8e56 Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Sun, 28 Jul 2019 14:40:28 +0300
-Subject: [PATCH] lx2160acex7: add 8x10G, dual 40G and dual 100G DPL/DPC files
+Subject: [PATCH 1/4] lx2160acex7: add 8x10G, dual 40G and dual 100G DPL/DPC
+ files
 
 Signed-off-by: Rabeeh Khoury <rabeeh@solid-run.com>
 ---
@@ -1906,5 +1907,5 @@ index 000000000000..5619fd2a4c0f
 +};
 +
 -- 
-2.20.1
+2.30.2
 

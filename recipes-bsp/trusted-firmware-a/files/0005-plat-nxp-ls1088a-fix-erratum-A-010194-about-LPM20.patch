@@ -1,0 +1,182 @@
+From dae1e7dfe8c6ad7834a5907685f57fe73b25cce0 Mon Sep 17 00:00:00 2001
+From: Ran Wang <ran.wang_1@nxp.com>
+Date: Fri, 21 Aug 2020 11:08:10 +0800
+Subject: [PATCH 05/15] plat: nxp: ls1088a: fix erratum A-010194 about LPM20
+
+Issue: There are two paths for wake request to be routed to GPP ARM
+cores. The first path is from GIC to PMU. This path can be masked with
+TPMWAKEMR0 register. The second path is from GIC to PMU then to EPU.
+From EPU, after some control logic, it is then routed back to PMU. The
+first path and second path(back from EPU) are then logically ORed and
+connected to EVENTI of ARM cores. There is logic problem with the first
+path for core 0, which is the last active core for LPM20.
+
+Workaround: ARM A5x core in STANDBYWFE should not be woken up by GIC
+wake request but must be woken up by EVENTI instead. This requires a
+change in the software to re-target the wakeup interrupts to a core
+other than the last active core0.
+
+Signed-off-by: Ran Wang <ran.wang_1@nxp.com>
+---
+ plat/nxp/common/include/plat_gicv3.h |   7 ++
+ plat/nxp/soc-ls1088/aarch64/ls1088.S | 110 +++++++++++++++++++++++++++
+ 2 files changed, 117 insertions(+)
+
+diff --git a/plat/nxp/common/include/plat_gicv3.h b/plat/nxp/common/include/plat_gicv3.h
+index 42f024b0c4aa..66d430f43658 100644
+--- a/plat/nxp/common/include/plat_gicv3.h
++++ b/plat/nxp/common/include/plat_gicv3.h
+@@ -21,8 +21,12 @@
+ #define GICD_CTLR_OFFSET        0x0
+ #define GICD_CLR_SPI_SR         0x58
+ #define GICD_IGROUPR_2          0x88
++#define GICD_ISENABLER_1        0x104
++#define GICD_ICENABLER_1        0x184
+ #define GICD_ISENABLER_2        0x108
+ #define GICD_ICENABLER_2        0x188
++#define GICD_ISENABLER_3        0x10c
++#define GICD_ICENABLER_3        0x18c
+ #define GICD_ICPENDR_2          0x288
+ #define GICD_ICACTIVER_2        0x388
+ #define GICD_IPRIORITYR_22      0x458
+@@ -69,6 +73,9 @@
+ #define GIC_IRM_SPI89           0x80000000
+ 
+ #define GICD_IROUTER_VALUE      0x100
++#define GICD_ISENABLER_1_VALUE  0x10000000
++#define GICD_ISENABLER_2_VALUE  0x100
++#define GICD_ISENABLER_3_VALUE  0x20100
+ #define GICR_WAKER_SLEEP_BIT    0x2
+ #define GICR_WAKER_ASLEEP       (1 << 2 | 1 << 1)
+ 
+diff --git a/plat/nxp/soc-ls1088/aarch64/ls1088.S b/plat/nxp/soc-ls1088/aarch64/ls1088.S
+index 537299720a13..f3f27211f47d 100644
+--- a/plat/nxp/soc-ls1088/aarch64/ls1088.S
++++ b/plat/nxp/soc-ls1088/aarch64/ls1088.S
+@@ -1061,6 +1061,80 @@ _soc_sys_pwrdn_wfi:
+     str  w6, [x2, #EPU_EPCTR10_OFFSET]
+     str  w7, [x2, #EPU_EPGCR_OFFSET]
+ 
++     /* A-010194: There is logic proglem
++      * in the path of GIC-to-PMU to issue
++      * wake request to core0
++      * Workaournd: Re-target the wakeup interrupts
++      * to a core other than the last active core0
++      */
++    ldr  x2, =NXP_GICD_ADDR
++
++     /* backup flextimer/mmc/usb interrupt router */
++    ldr  x0, =GICD_IROUTER60_OFFSET
++    ldr  x1, =GICD_IROUTER76_OFFSET
++    ldr  w4, [x2, x0]
++    ldr  w5, [x2, x1]
++    ldr  x0, =GICD_IROUTER112_OFFSET
++    ldr  x1, =GICD_IROUTER113_OFFSET
++    ldr  w6, [x2, x0]
++    ldr  w7, [x2, x1]
++    stp  x4,  x5,  [sp, #-16]!
++    stp  x6,  x7,  [sp, #-16]!
++
++     /* x2 = gicd base addr
++      * x0 = GICD_IROUTER112_OFFSET
++      * x1 = GICD_IROUTER113_OFFSET
++      */
++
++     /* re-route interrupt to cluster 1 */
++    ldr  w4, =GICD_IROUTER_VALUE
++    str  w4, [x2, x0]
++    str  w4, [x2, x1]
++    ldr  x0, =GICD_IROUTER60_OFFSET
++    ldr  x1, =GICD_IROUTER76_OFFSET
++    str  w4, [x2, x0]
++    str  w4, [x2, x1]
++    dsb  sy
++    isb
++
++     /* backup flextimer/mmc/usb interrupt enabler */
++    ldr  x0, =GICD_ISENABLER_1
++    ldr  w4, [x2, x0]
++    ldr  x1, =GICD_ISENABLER_2
++    ldr  w5, [x2, x1]
++    stp  x4,  x5,  [sp, #-16]!
++
++    ldr  x0, =GICD_ISENABLER_3
++    ldr  w4, [x2, x0]
++    ldr  x1, =GICD_ICENABLER_1
++    ldr  w5, [x2, x1]
++    stp  x4,  x5,  [sp, #-16]!
++
++    ldr  x0, =GICD_ICENABLER_2
++    ldr  w4, [x2, x0]
++    ldr  x1, =GICD_ICENABLER_3
++    ldr  w5, [x2, x1]
++    stp  x4,  x5,  [sp, #-16]!
++
++     /* enable related interrupt routing */
++    ldr  w4, =GICD_ISENABLER_1_VALUE
++    ldr  x0, =GICD_ISENABLER_1
++    str  w4, [x2, x0]
++    dsb  sy
++    isb
++
++    ldr  w4, =GICD_ISENABLER_2_VALUE
++    ldr  x0, =GICD_ISENABLER_2
++    str  w4, [x2, x0]
++    dsb  sy
++    isb
++
++    ldr  w4, =GICD_ISENABLER_3_VALUE
++    ldr  x0, =GICD_ISENABLER_3
++    str  w4, [x2, x0]
++    dsb  sy
++    isb
++
+      /* set POWMGTDCR [STP_PV_EN] = 1 */
+     ldr  x2, =NXP_POWMGTDCR
+     ldr  w4, =0x01
+@@ -1408,6 +1482,42 @@ _soc_sys_pwrdn_wfi:
+     bic  w4, w4, #0x01
+     str  w4, [x2]
+ 
++     /* restore flextimer/mmc/usb interrupt enabler */
++    ldr  x3, =NXP_GICD_ADDR
++    ldp  x0, x2, [sp], #16
++    ldr  x1, =GICD_ICENABLER_2
++    mvn  w0, w0
++    str  w0, [x3, x1]
++    ldr  x1, =GICD_ICENABLER_3
++    mvn  w2, w2
++    str  w2, [x3, x1]
++
++    ldp  x0, x2, [sp], #16
++    ldr  x1, =GICD_ISENABLER_3
++    str  w0, [x3, x1]
++    ldr  x1, =GICD_ICENABLER_1
++    mvn  w2, w2
++    str  w0, [x3, x1]
++
++    ldp  x0, x2, [sp], #16
++    ldr  x1, =GICD_ISENABLER_1
++    str  w0, [x3, x1]
++    ldr  x1, =GICD_ISENABLER_2
++    str  w0, [x3, x1]
++
++     /* restore flextimer/mmc/usb interrupt router */
++    ldr  x3, =NXP_GICD_ADDR
++    ldp  x0, x2, [sp], #16
++    ldr  x1, =GICD_IROUTER113_OFFSET
++    str  w2, [x3, x1]
++    ldr  x1, =GICD_IROUTER112_OFFSET
++    str  w0, [x3, x1]
++    ldp  x0, x2, [sp], #16
++    ldr  x1, =GICD_IROUTER76_OFFSET
++    str  w2, [x3, x1]
++    ldr  x1, =GICD_IROUTER60_OFFSET
++    str  w0, [x3, x1]
++
+      /* restore EPU registers */
+     ldr  x3, =NXP_EPU_ADDR
+     ldp  x0, x2, [sp], #16
+-- 
+2.30.2
+

@@ -1,7 +1,7 @@
-From 8cdc0f6a1e163ff09590c4e3589a61a3fca79da4 Mon Sep 17 00:00:00 2001
+From 0728e1186567ca28ef00c1f9cedeba8d67ba8ef3 Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Mon, 23 Mar 2020 12:16:13 +0200
-Subject: [PATCH 4/8] refactor a009531, a008851 and a011270
+Subject: [PATCH 04/15] refactor a009531, a008851 and a011270
 
 1. Add 'load conditional', 'jump condidional' and 'jump' to PBI
 instructions.
@@ -175,5 +175,5 @@ index 863f755f4cce..c2d06f63d610 100755
              if p1 == None or p2 == None:
                  print('Error: "awrite" instruction requires two parameters')
 -- 
-2.20.1
+2.30.2
 

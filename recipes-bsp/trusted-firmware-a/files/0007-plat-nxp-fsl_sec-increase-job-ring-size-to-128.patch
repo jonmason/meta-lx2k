@@ -1,0 +1,31 @@
+From bb806100c92497de41e0492257e26bd84e99b46c Mon Sep 17 00:00:00 2001
+From: Sahil Malhotra <sahil.malhotra@nxp.com>
+Date: Fri, 6 Nov 2020 15:49:42 +0530
+Subject: [PATCH 07/15] plat: nxp: fsl_sec: increase job ring size to 128
+
+Signed-off-by: Sahil Malhotra <sahil.malhotra@nxp.com>
+QSDK-7101
+---
+ plat/nxp/drivers/fsl_sec/include/jr_driver_config.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/plat/nxp/drivers/fsl_sec/include/jr_driver_config.h b/plat/nxp/drivers/fsl_sec/include/jr_driver_config.h
+index 72522f6fcf12..e74a4973b125 100644
+--- a/plat/nxp/drivers/fsl_sec/include/jr_driver_config.h
++++ b/plat/nxp/drivers/fsl_sec/include/jr_driver_config.h
+@@ -161,10 +161,10 @@
+  * \todo Should set to 750, according to the calculation above, but
+  * the JR size must be power of 2, thus the next closest value must
+  * be chosen (i.e. 512 since 1024 is not available)
+- * For firmware choose this to be 16
++ * For firmware choose this to be 128
+  */
+ 
+-#define SEC_JOB_RING_SIZE    16
++#define SEC_JOB_RING_SIZE    128
+ 
+ /*
+  * Interrupt coalescing related configuration.
+-- 
+2.30.2
+

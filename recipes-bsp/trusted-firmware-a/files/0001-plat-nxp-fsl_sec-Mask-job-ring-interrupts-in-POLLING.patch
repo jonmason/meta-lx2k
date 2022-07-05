@@ -1,0 +1,184 @@
+From 06fcfdadf7efa4e32dddcfc6c2813a000f72fa6e Mon Sep 17 00:00:00 2001
+From: Andrei Botila <andrei.botila@nxp.com>
+Date: Thu, 30 Apr 2020 18:10:10 +0300
+Subject: [PATCH 01/15] plat/nxp/fsl_sec: Mask job ring interrupts in POLLING
+ mode for LPM20 state
+
+In Power Management in order for the device to go into sleep(LPM20)
+it needs to quiesce all internal IP modules. We quiesce the SEC module
+by masking the interrupts of default job ring.
+
+Signed-off-by: Andrei Botila <andrei.botila@nxp.com>
+---
+ .../drivers/fsl_sec/include/sec_hw_specific.h | 17 +++++++
+ .../drivers/fsl_sec/include/sec_jr_driver.h   |  6 ---
+ .../nxp/drivers/fsl_sec/src/sec_hw_specific.c | 44 ++++++++++++++++---
+ plat/nxp/drivers/fsl_sec/src/sec_jr_driver.c  |  4 +-
+ 4 files changed, 56 insertions(+), 15 deletions(-)
+
+diff --git a/plat/nxp/drivers/fsl_sec/include/sec_hw_specific.h b/plat/nxp/drivers/fsl_sec/include/sec_hw_specific.h
+index 0809c6ae9f4d..d8aaaf291301 100644
+--- a/plat/nxp/drivers/fsl_sec/include/sec_hw_specific.h
++++ b/plat/nxp/drivers/fsl_sec/include/sec_hw_specific.h
+@@ -157,6 +157,7 @@ struct jobring_regs {
+ #define JR_REG_JRCFG_LO_ICTT_SHIFT	0x10
+ #define JR_REG_JRCFG_LO_ICDCT_SHIFT	0x08
+ #define JR_REG_JRCFG_LO_ICEN_EN		0x02
++#define JR_REG_JRCFG_LO_IMSK_EN		0x01
+ 
+  /* Constants for Descriptor Processing errors */
+ #define SEC_HW_ERR_SSRC_NO_SRC			0x00
+@@ -472,6 +473,22 @@ void sec_handle_desc_error(struct sec_job_ring_t *job_ring,
+  */
+ int shutdown_job_ring(struct sec_job_ring_t *job_ring);
+ 
++/*
++ * @brief Enable irqs on associated job ring.
++ * @param [in] job_ring The job ring
++ * @retval  0 for success
++ * @retval  -1 for error
++ */
++int jr_enable_irqs(struct sec_job_ring_t *job_ring);
++
++/*
++ * @brief Disable irqs on associated job ring.
++ * @param [in] job_ring The job ring
++ * @retval  0 for success
++ * @retval  -1 for error
++ */
++int jr_disable_irqs(struct sec_job_ring_t *job_ring);
++
+  /*
+   * IRJA - Input Ring Jobs Added Register shows
+   * how many new jobs were added to the Input Ring.
+diff --git a/plat/nxp/drivers/fsl_sec/include/sec_jr_driver.h b/plat/nxp/drivers/fsl_sec/include/sec_jr_driver.h
+index 56550bff4935..3e56beb40482 100644
+--- a/plat/nxp/drivers/fsl_sec/include/sec_jr_driver.h
++++ b/plat/nxp/drivers/fsl_sec/include/sec_jr_driver.h
+@@ -176,10 +176,4 @@ int enq_jr_desc(void *job_ring_handle, struct job_descriptor *jobdescr);
+  */
+ int dequeue_jr(void *job_ring_handle, int32_t limit);
+ 
+-/* To enable irqs on associated irq_id  */
+-int jr_enable_irqs(uint32_t irq_id);
+-
+-/* To disable irqs on associated irq_id  */
+-int jr_disable_irqs(uint32_t irq_id);
+-
+ #endif /* _JR_DRIVER_H_  */
+diff --git a/plat/nxp/drivers/fsl_sec/src/sec_hw_specific.c b/plat/nxp/drivers/fsl_sec/src/sec_hw_specific.c
+index 114104e984f5..fcac0e06df8c 100644
+--- a/plat/nxp/drivers/fsl_sec/src/sec_hw_specific.c
++++ b/plat/nxp/drivers/fsl_sec/src/sec_hw_specific.c
+@@ -194,7 +194,7 @@ int hw_shutdown_job_ring(sec_job_ring_t *job_ring)
+ 	 * changing the code logic too much
+ 	 */
+ 
+-	jr_disable_irqs(job_ring->irq_fd);
++	jr_disable_irqs(job_ring);
+ 
+ 	/* initiate flush (required prior to reset) */
+ 	sec_out32(&regs->jrcr, JR_REG_JRCR_VAL_RESET);
+@@ -212,7 +212,7 @@ int hw_shutdown_job_ring(sec_job_ring_t *job_ring)
+ 		ERROR("Failed to flush hw job ring %x\n %u", tmp, timeout);
+ 		/* unmask interrupts */
+ 		if (job_ring->jr_mode != SEC_NOTIFICATION_TYPE_POLL)
+-			jr_enable_irqs(job_ring->irq_fd);
++			jr_enable_irqs(job_ring);
+ 		return -1;
+ 	}
+ 	/* Initiate reset */
+@@ -227,12 +227,12 @@ int hw_shutdown_job_ring(sec_job_ring_t *job_ring)
+ 		ERROR("Failed to reset hw job ring\n");
+ 		/* unmask interrupts */
+ 		if (job_ring->jr_mode != SEC_NOTIFICATION_TYPE_POLL)
+-			jr_enable_irqs(job_ring->irq_fd);
++			jr_enable_irqs(job_ring);
+ 		return -1;
+ 	}
+ 	/* unmask interrupts */
+ 	if (job_ring->jr_mode != SEC_NOTIFICATION_TYPE_POLL)
+-		jr_enable_irqs(job_ring->irq_fd);
++		jr_enable_irqs(job_ring);
+ 	return 0;
+ 
+ }
+@@ -567,7 +567,7 @@ int shutdown_job_ring(struct sec_job_ring_t *job_ring)
+ 		hw_job_ring_disable_coalescing(job_ring);
+ 
+ 	if (job_ring->jr_mode != SEC_NOTIFICATION_TYPE_POLL) {
+-		ret = jr_disable_irqs(job_ring->irq_fd);
++		ret = jr_disable_irqs(job_ring);
+ 		if (ret) {
+ 			ERROR("Failed to disable irqs for job ring");
+ 			return ret;
+@@ -577,12 +577,42 @@ int shutdown_job_ring(struct sec_job_ring_t *job_ring)
+ 	return 0;
+ }
+ 
+-int jr_enable_irqs(uint32_t irq_id)
++int jr_enable_irqs(struct sec_job_ring_t *job_ring)
+ {
++	uint32_t reg_val = 0;
++	struct jobring_regs *regs =
++	    (struct jobring_regs *)job_ring->register_base_addr;
++
++	/* Get the current value of the register */
++	reg_val = sec_in32(&regs->jrcfg1);
++
++	/* Enable interrupts by disabling interrupt masking*/
++	reg_val &= ~JR_REG_JRCFG_LO_IMSK_EN;
++
++	/* Update parameters in HW */
++	sec_out32(&regs->jrcfg1, reg_val);
++
++	VERBOSE("Enable interrupts on JR\n");
++
+ 	return 0;
+ }
+ 
+-int jr_disable_irqs(uint32_t irq_id)
++int jr_disable_irqs(struct sec_job_ring_t *job_ring)
+ {
++	uint32_t reg_val = 0;
++	struct jobring_regs *regs =
++	    (struct jobring_regs *)job_ring->register_base_addr;
++
++	/* Get the current value of the register */
++	reg_val = sec_in32(&regs->jrcfg1);
++
++	/* Disable interrupts by enabling interrupt masking*/
++	reg_val |= JR_REG_JRCFG_LO_IMSK_EN;
++
++	/* Update parameters in HW */
++	sec_out32(&regs->jrcfg1, reg_val);
++
++	VERBOSE("Disable interrupts on JR\n");
++
+ 	return 0;
+ }
+diff --git a/plat/nxp/drivers/fsl_sec/src/sec_jr_driver.c b/plat/nxp/drivers/fsl_sec/src/sec_jr_driver.c
+index a4652e31b894..5165ac66cb51 100644
+--- a/plat/nxp/drivers/fsl_sec/src/sec_jr_driver.c
++++ b/plat/nxp/drivers/fsl_sec/src/sec_jr_driver.c
+@@ -90,7 +90,7 @@ void *init_job_ring(uint8_t jr_mode,
+ 	if (jr_mode == SEC_NOTIFICATION_TYPE_IRQ) {
+ 		/* Enble IRQ if driver work sin interrupt mode */
+ 		ERROR("Enabling DONE IRQ generation on job ring\n");
+-		ret = jr_enable_irqs(irq_id);
++		ret = jr_enable_irqs(job_ring);
+ 		if (ret) {
+ 			ERROR("Failed to enable irqs for job ring\n");
+ 			return NULL;
+@@ -201,7 +201,7 @@ int dequeue_jr(void *job_ring_handle, int32_t limit)
+ 	if (job_ring->jr_mode == SEC_NOTIFICATION_TYPE_IRQ) {
+ 
+ 		/* Always enable IRQ generation when in pure IRQ mode */
+-		ret = jr_enable_irqs(job_ring->irq_fd);
++		ret = jr_enable_irqs(job_ring);
+ 		if (ret) {
+ 			ERROR("Failed to enable irqs for job ring");
+ 			return ret;
+-- 
+2.30.2
+

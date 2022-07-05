@@ -1,7 +1,8 @@
-From 4841931bc596c59150f9a191ed01ac71771b25ef Mon Sep 17 00:00:00 2001
+From b01ddef58406ed081f45c1205fdfe0a828059d0f Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Mon, 23 Mar 2020 12:35:04 +0200
-Subject: [PATCH 5/8] lx2160a: add SVR check for a050234 to apply only on rev1
+Subject: [PATCH 05/15] lx2160a: add SVR check for a050234 to apply only on
+ rev1
 
 Signed-off-by: Rabeeh Khoury <rabeeh@solid-run.com>
 ---
@@ -26,5 +27,5 @@ index 72a40e4c2b0f..213070939885 100644
  write 0x1ea1240,0x20081004
  write 0x1ea1280,0x20081004
 -- 
-2.20.1
+2.30.2
 

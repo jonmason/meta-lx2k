@@ -1,7 +1,7 @@
-From 297d8c05c573ef03f77d276dc886a2b7d5acf5a8 Mon Sep 17 00:00:00 2001
+From 94141c6f2e2eb5489289d00d83e8214a2e103b73 Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Tue, 24 Mar 2020 03:42:14 +0200
-Subject: [PATCH 7/8] lx2160a: add generic bootloc section
+Subject: [PATCH 07/15] lx2160a: add generic bootloc section
 
 The generic bootloc section does conditional blockcopy from SD/eMMC and
 SPI with some predefined addresses.
@@ -107,5 +107,5 @@ index 000000000000..645182f74b87
 +.end
 +
 -- 
-2.20.1
+2.30.2
 

@@ -2,10 +2,23 @@ THISDIR := "${THISDIR}"
 FILESEXTRAPATHS_prepend = "${THISDIR}/files/:"
 
 SRC_URI = "git://source.codeaurora.org/external/qoriq/qoriq-components/atf;protocol=https;nobranch=1 \
-           file://0001-plat-nxp-Add-lx2160acex7-module-support.patch \
-           file://0002-plat-nxp-lx2160a-auto-boot.patch \
+           file://0001-plat-nxp-fsl_sec-Mask-job-ring-interrupts-in-POLLING.patch \
+           file://0002-drivers-nxp-ddr-Enable-workaround-for-Erratum-A05045.patch \
+           file://0003-plat-nxp-ls1088a-fix-erratum-A-011127-about-LPM20.patch \
+           file://0004-ls1046a-remove-workaround-for-QSPI-issue-during-lpm2.patch \
+           file://0005-plat-nxp-ls1088a-fix-erratum-A-010194-about-LPM20.patch \
+           file://0006-plat-nxp-ls1048a-fix-swlpm20-hang.patch \
+           file://0007-plat-nxp-fsl_sec-increase-job-ring-size-to-128.patch \
+           file://0008-plat-nxp-Add-lx2160acex7-module-support.patch \
+           file://0009-plat-nxp-lx2160a-auto-boot.patch \
+           file://0010-lx2160acex7-assert-SUS_S5-GPIO-to-poweroff-the-COM.patch \
+           file://0011-lx2160a-fix-SVR-12c-mask.patch \
+           file://0012-plat-nxp-efuse-io-storage-must-be-checked-first.patch \
+           file://0013-plat-nxp-sfp-driver-GPIO-fixes-and-PPWM-setting.patch \
+           file://0014-lx2160acex7-add-timer-based-counter.patch \
+           file://0015-plat-nxp-add-tool-print-when-choosing-autodetect-mod.patch \
           "
-SRCREV = "4a82c939a0211196e2b80a495f966383803753bb"
+SRCREV = "7d748e6f0ec652ba7c43733dc67a3d0b0217390a"
 
 COMPATIBLE_MACHINE = "honeycomb_lx2k"
 TFA_PLATFORM = "lx2160acex7"

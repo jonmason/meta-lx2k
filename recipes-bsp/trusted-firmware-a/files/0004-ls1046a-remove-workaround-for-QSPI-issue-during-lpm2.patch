@@ -1,0 +1,94 @@
+From b07d81a79894b70f6a5d8f0031e7bd7309bfba1a Mon Sep 17 00:00:00 2001
+From: Ran Wang <ran.wang_1@nxp.com>
+Date: Thu, 30 Jul 2020 11:53:25 +0800
+Subject: [PATCH 04/15] ls1046a: remove workaround for QSPI issue during lpm20
+
+Previously LS1046A could not go into LPM20 state because of QSPI issue. Now
+it have been fixed in kernel QSPI driver. so Remove this workaround.
+
+Signed-off-by: Ran Wang <ran.wang_1@nxp.com>
+---
+ plat/nxp/soc-ls1046/aarch64/ls1046.S | 41 ----------------------------
+ plat/nxp/soc-ls1046/include/soc.h    |  2 --
+ 2 files changed, 43 deletions(-)
+
+diff --git a/plat/nxp/soc-ls1046/aarch64/ls1046.S b/plat/nxp/soc-ls1046/aarch64/ls1046.S
+index d2c0630a0dca..f50d281f59f1 100644
+--- a/plat/nxp/soc-ls1046/aarch64/ls1046.S
++++ b/plat/nxp/soc-ls1046/aarch64/ls1046.S
+@@ -1111,14 +1111,6 @@ _soc_sys_prep_pwrdn:
+ _soc_sys_pwrdn_wfi:
+     mov  x4, x30
+ 
+-     /* save DEVDISR4 to w16 then disable QSPI */
+-    mov  x0, #DCFG_DEVDISR4_OFFSET
+-    bl   read_reg_dcfg
+-    mov  w16, w0
+-    mov  x0, #DCFG_DEVDISR4_OFFSET
+-    ldr  x1, =DEVDISR4_VALUE
+-    bl   write_reg_dcfg
+-
+      /* request LPM20 */
+     mov  x0, #RCPM_POWMGTCSR_OFFSET
+     bl   read_reg_rcpm
+@@ -1130,11 +1122,6 @@ _soc_sys_pwrdn_wfi:
+     isb
+     wfi
+ 
+-     /* restore DEVDISR4 after LPM20 */
+-    mov  x0, #DCFG_DEVDISR4_OFFSET
+-    mov  w1, w16
+-    bl   write_reg_dcfg
+-
+     mov  x30, x4
+     ret
+ 
+@@ -1154,32 +1141,4 @@ _soc_sys_exit_pwrdn:
+ 
+     ret
+ 
+-/*---------------------------------------------------------------------------*/
+-
+- /* write a register in the DCFG block
+-  * in:  x0 = offset
+-  * in:  w1 = value to write
+-  * uses x0, x1, x2, x3
+-  */
+-write_reg_dcfg:
+-    ldr  x2, =NXP_DCFG_ADDR
+-     /* swap for BE */
+-    rev  w3, w1
+-    str  w3, [x2, x0]
+-    ret
+-
+-/*---------------------------------------------------------------------------*/
+-
+- /* read a register in the DCFG block
+-  * in:  x0 = offset
+-  * out: w0 = value read
+-  * uses x0, x1, x2
+-  */
+-read_reg_dcfg:
+-    ldr  x2, =NXP_DCFG_ADDR
+-    ldr  w1, [x2, x0]
+-     /* swap for BE */
+-    rev  w0, w1
+-    ret
+-
+ /*---------------------------------------------------------------------------*/
+diff --git a/plat/nxp/soc-ls1046/include/soc.h b/plat/nxp/soc-ls1046/include/soc.h
+index dc0045bbcf67..722b07340f4c 100644
+--- a/plat/nxp/soc-ls1046/include/soc.h
++++ b/plat/nxp/soc-ls1046/include/soc.h
+@@ -70,8 +70,6 @@
+ #define NXP_PLATFORM_CLK_DIVIDER	1
+ #define NXP_UART_CLK_DIVIDER		2
+ 
+-#define DEVDISR4_VALUE            0x08000000
+-
+  /* set this switch to 1 if you need to keep the debug block
+   * clocked during system power-down
+   */
+-- 
+2.30.2
+

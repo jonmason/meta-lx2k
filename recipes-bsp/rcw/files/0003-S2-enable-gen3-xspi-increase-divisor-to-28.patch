@@ -1,7 +1,7 @@
-From 0faae2f1396496d2229cd81e284e2a7297d582f5 Mon Sep 17 00:00:00 2001
+From d697ad1eb3772041873548a3279a76c5f24934e5 Mon Sep 17 00:00:00 2001
 From: Rabeeh Khoury <rabeeh@solid-run.com>
 Date: Tue, 5 Nov 2019 10:35:32 +0200
-Subject: [PATCH 3/8] S2 - enable gen3, xspi increase divisor to 28
+Subject: [PATCH 03/15] S2 - enable gen3, xspi increase divisor to 28
 
 Serdes group 2 enable PCIe gen 3
 XSPI increase divisor to 28 - this fixes UEFI SPI flash detection.
@@ -36,5 +36,5 @@ index eecc314edea9..28310c97577e 100644
 -#include <../lx2160asi/flexspi_divisor_24.rcw>
 +#include <../lx2160asi/flexspi_divisor_28.rcw>
 -- 
-2.20.1
+2.30.2
 

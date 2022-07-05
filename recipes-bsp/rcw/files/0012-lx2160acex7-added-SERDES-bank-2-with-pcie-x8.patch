@@ -1,0 +1,21 @@
+From e9250440f3d4ffff63165b0ce6a0dc0e3c6449ca Mon Sep 17 00:00:00 2001
+From: Rabeeh Khoury <rabeeh@solid-run.com>
+Date: Tue, 3 Nov 2020 15:34:34 +0200
+Subject: [PATCH 12/15] lx2160acex7: added SERDES bank 2 with pcie x8
+
+Signed-off-by: Rabeeh Khoury <rabeeh@solid-run.com>
+---
+ lx2160acex7/configs/lx2160a_SD2_2.rcwi | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 lx2160acex7/configs/lx2160a_SD2_2.rcwi
+
+diff --git a/lx2160acex7/configs/lx2160a_SD2_2.rcwi b/lx2160acex7/configs/lx2160a_SD2_2.rcwi
+new file mode 100644
+index 000000000000..daeeb5e090bc
+--- /dev/null
++++ b/lx2160acex7/configs/lx2160a_SD2_2.rcwi
+@@ -0,0 +1 @@
++SRDS_PRTCL_S2=2
+-- 
+2.30.2
+
