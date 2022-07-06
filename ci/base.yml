@@ -5,7 +5,7 @@ distro: poky
 
 defaults:
   repos:
-    refspec: hardknott
+    refspec: honister
 
 repos:
   meta-lx2k:
@@ -33,7 +33,7 @@ env:
 
 local_conf_header:
   base: |
-    EXTRA_IMAGE_FEATURES_append = " debug-tweaks"
+    EXTRA_IMAGE_FEATURES:append = " debug-tweaks"
     INHERIT += "rm_work"
 
 machine: unset

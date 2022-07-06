@@ -21,7 +21,7 @@ DPC_SYMLINK ?= "dpc-8_x_usxgmii.dtb"
 DPC_OFFSET ?= "28672"
 
 
-IMAGE_CMD_lx2k_fw_img () {
+IMAGE_CMD:lx2k_fw_img () {
 	dd if=${DEPLOY_DIR_IMAGE}/${BL2_SYMLINK} of=${FWIMG} bs=512 seek=${BL2_OFFSET} conv=notrunc
 	dd if=${DEPLOY_DIR_IMAGE}/${FIP_SYMLINK} of=${FWIMG} bs=512 seek=${FIP_OFFSET} conv=notrunc
 	dd if=${DEPLOY_DIR_IMAGE}/${FIP_DDR_SYMLINK} of=${FWIMG} bs=512 seek=${FIP_DDR_OFFSET} conv=notrunc

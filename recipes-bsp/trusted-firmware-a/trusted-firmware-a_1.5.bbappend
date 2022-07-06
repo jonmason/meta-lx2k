@@ -1,5 +1,5 @@
 THISDIR := "${THISDIR}"
-FILESEXTRAPATHS_prepend = "${THISDIR}/files/:"
+FILESEXTRAPATHS:prepend = "${THISDIR}/files/:"
 
 SRC_URI = "git://source.codeaurora.org/external/qoriq/qoriq-components/atf;protocol=https;nobranch=1 \
            file://0001-plat-nxp-fsl_sec-Mask-job-ring-interrupts-in-POLLING.patch \
@@ -17,6 +17,7 @@ SRC_URI = "git://source.codeaurora.org/external/qoriq/qoriq-components/atf;proto
            file://0013-plat-nxp-sfp-driver-GPIO-fixes-and-PPWM-setting.patch \
            file://0014-lx2160acex7-add-timer-based-counter.patch \
            file://0015-plat-nxp-add-tool-print-when-choosing-autodetect-mod.patch \
+           file://yocto.patch \
           "
 SRCREV = "7d748e6f0ec652ba7c43733dc67a3d0b0217390a"
 
@@ -31,6 +32,6 @@ EXTRA_OEMAKE += "${@bb.utils.contains('TFA_UBOOT', '0', 'BL33=${DEPLOY_DIR_IMAGE
 
 do_compile[depends] += "rcw:do_deploy"
 
-do_deploy_append() {
+do_deploy:append() {
         install -m 0644 ${BUILD_DIR}/bl2_${BOOT}.pbl ${DEPLOYDIR}/
 }

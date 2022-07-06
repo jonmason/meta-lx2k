@@ -1,0 +1,13 @@
+diff --git a/Makefile b/Makefile
+index 94ae63ea2..1744753c0 100644
+--- a/Makefile
++++ b/Makefile
+@@ -163,7 +163,7 @@ ASFLAGS			+=	$(CPPFLAGS) $(ASFLAGS_$(ARCH))			\
+ 				-D__ASSEMBLY__ -ffreestanding 			\
+ 				-Wa,--fatal-warnings
+ TF_CFLAGS		+=	$(CPPFLAGS) $(TF_CFLAGS_$(ARCH))		\
+-				-ffreestanding -fno-builtin -Wall -std=gnu99	\
++				-ffreestanding -fno-builtin -std=gnu99	\
+ 				-Os -ffunction-sections -fdata-sections
+ 
+ GCC_V_OUTPUT		:=	$(shell $(CC) -v 2>&1)
