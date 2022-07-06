@@ -5,7 +5,7 @@ distro: poky
 
 defaults:
   repos:
-    refspec: honister
+    refspec: kirkstone
 
 repos:
   meta-lx2k:
